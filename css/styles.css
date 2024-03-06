@@ -32,7 +32,7 @@ input[type='text'] {
 }
 
 .column-full {
-  min-height: 100px;
+  min-height: 66px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +46,7 @@ input[type='text'] {
 input {
   font-size: 24px;
   border-radius: 7px;
+  height: 112px;
 }
 
 .search-button {
@@ -59,7 +60,6 @@ input {
 .row {
   /* border: 2px red solid; */
   display: flex;
-  justify-content: center;
 }
 
 .new-button-div {
@@ -108,18 +108,6 @@ img {
   justify-content: flex-end;
 }
 
-.column-full-textarea {
-  size: 30px;
-  font-weight: 600;
-  line-height: 40.72px;
-  width: 100px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 10px;
-  justify-content: center;
-}
-
 .adding-icon {
   position: relative;
   top: 106px;
@@ -139,4 +127,15 @@ h1 {
 
   /* margin: 0 auto; */
   text-align: center;
+}
+
+#sunset-entries {
+  border: solid 2px black;
+  width: 375px;
+  padding: 0;
+  border-radius: 15px;
+}
+
+.column-fourth {
+  flex-basis: 25%;
 }

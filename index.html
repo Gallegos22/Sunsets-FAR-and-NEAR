@@ -25,7 +25,7 @@
     </div>
     <!-- This is the Form Section -->
     <main class="main-container">
-      <div data-view="entry-form" class="" id="entry-form">
+      <div data-view="entry-form" class="hidden" id="entry-form">
         <form id="sunsetForm">
           <div class="row">
             <div class="column-full">
@@ -63,9 +63,9 @@
         </form>
       </div>
       <!-- This is the Entry Section -->
-      <div data-view="Sunset-entries" class="hidden" id="sunset-entries">
+      <div data-view="Sunset-entries" class="">
         <div class="row">
-          <div class="column-half">
+          <div class="column-full">
             <div class="sunset-entries">
               <h2>SunRise &amp; SunSet Info:</h2>
             </div>
@@ -73,10 +73,8 @@
         </div>
         <div class="view-container">
           <div class="view">
-            <p id="noSunsetsText" class="noSunsetsText hidden">
-              No Sunsets Have Been Added..
-            </p>
-            <ul id="Sunset-entries">
+            <p class="noSunsetsText hidden">No Sunsets Have Been Added..</p>
+            <ul id="sunset-entries">
               <li>
                 <div class="row">
                   <div class="column-full">
@@ -87,11 +85,11 @@
                 </div>
                 <div class="row">
                   <div class="column-fourth">
-                    <img src="/images/Sunrise.png" class="picture" />
+                    <img src="/images/Sunrise.png" class="picture" alt="sdfa" />
                   </div>
                   <div class="column-fourth">
                     <div class="info">
-                      <p id="sunriseApi"></p>
+                      <p id="sunriseApi">6:24AM</p>
                     </div>
                   </div>
                   <div class="column-fourth">
@@ -99,22 +97,27 @@
                   </div>
                   <div class="column-fourth">
                     <div class="info">
-                      <p id="sunsetApi"></p>
+                      <p id="sunsetApi">1:35PM</p>
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="column-full-textarea">
-                    <i
-                      class="fa-solid fa-plus fa-2xl adding-icon"
-                      style="color: #fff700"></i>
+                  <div class="column-full">
                     <div class="description">
                       <label>Notes About The Sunset &amp; Sunrise:</label>
                       <br />
-                      <textarea name="notes" id="add-notes" cols="30" rows="10">
-The Sunset Was Beautiful</textarea
-                      >
+                      <textarea
+                        name="sunset-description"
+                        id="description"
+                        cols="30"
+                        rows="10"></textarea>
                     </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column-full">
+                    <button type="submit" class="add-sunset">Add</button>
+                    <button>Go Back</button>
                   </div>
                 </div>
               </li>
