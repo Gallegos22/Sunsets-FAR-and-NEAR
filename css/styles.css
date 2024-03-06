@@ -32,13 +32,14 @@ input[type='text'] {
 }
 
 .column-full {
-  min-height: 66px;
+  min-height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
   position: relative;
-  max-width: 100%;
+
+  /* max-width: 100%; */
 
   /* border: 2px red solid; */
 }
@@ -50,7 +51,7 @@ input {
   /* height: 112px; */
 }
 
-.search-button {
+.searchBtn {
   font-size: 24px;
   border-radius: 18px;
   background-color: rgb(250, 165, 0);
@@ -134,16 +135,12 @@ h1 {
   justify-content: center;
 }
 
-#sunset-entries {
+#sunset-info {
   border: solid 2px black;
-  width: 375px;
+  width: 390px;
   padding: 0;
   border-radius: 15px;
 }
-
-/* .column-fourth {
-  flex-basis: 50%;
-} */
 
 .addBtn {
   font-size: 18px;
@@ -151,4 +148,9 @@ h1 {
   background-color: rgb(250, 165, 0);
   color: white;
   cursor: pointer;
+}
+
+.sunriseApi,
+.sunsetApi {
+  margin-top: -23px;
 }

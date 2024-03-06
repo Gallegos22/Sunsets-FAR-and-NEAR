@@ -57,33 +57,23 @@
             placeholder="Latitude &amp; Longitude"
             id="coordinates"
             required />
-          <button class="search-button" id="searchBtn">Search</button>
+          <button class="searchBtn">Search</button>
         </div>
       </form>
       <div id="sunset-container">
-        <ul id="sunset-entries">
+        <ul id="sunset-info">
           <li>
             <div class="row">
               <div class="column-full">
-                <h3 id="lat-long">Latitude: 34.04966, Longitude: -118.21131</h3>
+                <h3>Latitude: 34.04966 Longitude: -118.21131</h3>
               </div>
             </div>
             <div class="row">
-              <div class="column-fourth">
-                <img src="/images/Sunrise.png" class="picture" alt="sdfa" />
-              </div>
-              <div class="column-fourth">
-                <div class="info">
-                  <p id="sunriseApi">6:24AM</p>
-                </div>
-              </div>
-              <div class="column-fourth">
-                <img src="/images/Sunset.png" class="picture" />
-              </div>
-              <div class="column-fourth">
-                <div class="info">
-                  <p id="sunsetApi">1:35PM</p>
-                </div>
+              <div class="column-full">
+                <img src="/images/Sunrise.png" />
+                <p class="sunriseApi">6:24AM</p>
+                <img src="/images/Sunset.png" />
+                <p class="sunsetApi">1:35PM</p>
               </div>
             </div>
             <div class="row">
@@ -93,7 +83,7 @@
                   <br />
                   <textarea
                     name="sunset-description"
-                    id="description"
+                    id="notes"
                     cols="30"
                     rows="10"></textarea>
                 </div>
