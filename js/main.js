@@ -38,7 +38,6 @@ $searchButtonForm.addEventListener('submit', async function (e) {
 function renderEntry(entry, lat, long) {
   console.log(entry);
   const li = document.createElement('li');
-  // li.setAttribute('data-entry-id', entry.entryId.toString());
   const row1 = document.createElement('div');
   row1.setAttribute('class', 'row');
   li.append(row1);
@@ -93,6 +92,10 @@ function renderEntry(entry, lat, long) {
   li.append(row4);
   const colFull4 = document.createElement('div');
   colFull4.setAttribute('class', 'column-full');
+  row4.append(colFull4);
+  const addBtn = document.createElement('button');
+  addBtn.setAttribute('class', 'addBtn');
+  addBtn.textContent = 'Add Sunset';
+  colFull4.append(addBtn);
   return li;
 }
-// console.log(renderEntry());

@@ -8,8 +8,6 @@ body {
 
 .heading-container {
   display: flex;
-
-  /* justify-content: center; */
   font-family: 'Sedan SC', sans-serif;
   font-size: 28px;
   border: 2px red solid;
@@ -19,11 +17,6 @@ body {
 
 i {
   margin-top: 19px;
-
-  /* position: relative;
-  left: 100px; */
-
-  /* margin-left: 50px; */
   cursor: pointer;
 }
 
@@ -38,17 +31,11 @@ input[type='text'] {
   align-items: center;
   flex-grow: 1;
   position: relative;
-
-  /* max-width: 100%; */
-
-  /* border: 2px red solid; */
 }
 
 input {
   font-size: 24px;
   border-radius: 7px;
-
-  /* height: 112px; */
 }
 
 .searchBtn {
@@ -60,8 +47,8 @@ input {
 }
 
 .row {
-  /* border: 2px red solid; */
   display: flex;
+  justify-content: center;
 }
 
 .new-button-div {
@@ -117,16 +104,10 @@ img {
 a {
   flex-grow: 1;
   text-align: center;
-
-  /* position: absolute; */
-
-  /* right: 0; */
 }
 
 h1 {
   flex-grow: 2;
-
-  /* margin: 0 auto; */
   text-align: center;
 }
 
@@ -136,10 +117,8 @@ h1 {
 }
 
 #sunset-info {
-  border: solid 2px black;
   width: 390px;
   padding: 0;
-  border-radius: 15px;
 }
 
 .addBtn {
@@ -153,4 +132,9 @@ h1 {
 .sunriseApi,
 .sunsetApi {
   margin-top: -23px;
+}
+
+#sunset-info > li {
+  border: solid 2px black;
+  border-radius: 15px;
 }
