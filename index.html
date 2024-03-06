@@ -24,126 +24,108 @@
       </div>
     </div>
     <!-- This is the Form Section -->
-    <main class="main-container">
-      <div data-view="entry-form" class="hidden" id="entry-form">
-        <form id="sunsetForm">
-          <div class="row">
-            <div class="column-full">
-              <h3>Please Follow Instructions To Use Website</h3>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <ul id="instructions">
-                <li>
-                  1. Click<a
-                    href="https://www.freemaptools.com/convert-us-zip-code-to-lat-lng.htm#google_vignette"
-                    >HERE</a
-                  >to convert your zipcode to Latitude &amp; Longitude.
-                </li>
-                <li>
-                  2. Copy and Paste your Latitude &amp; Longitude and come back
-                  to the website.
-                </li>
-                <li>
-                  3. Paste it into the search bar and click &quot;Search&quot;.
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="column-full">
-            <input
-              type="text"
-              name="coordinates"
-              placeholder="Latitude &amp; Longitude"
-              id="coordinates"
-              required />
-            <button class="search-button" id="searchBtn">Search</button>
-          </div>
-        </form>
-      </div>
-      <!-- This is the Entry Section -->
-      <div data-view="Sunset-entries" class="">
+    <div data-view="entry-form" class="">
+      <form>
         <div class="row">
           <div class="column-full">
-            <div class="sunset-entries">
-              <h2>SunRise &amp; SunSet Info:</h2>
-            </div>
+            <h3>Please Follow Instructions To Use Website</h3>
           </div>
         </div>
-        <div class="view-container">
-          <div class="view">
-            <p class="noSunsetsText hidden">No Sunsets Have Been Added..</p>
-            <ul id="sunset-entries">
+        <div class="row">
+          <div class="column-full">
+            <ul id="instructions">
               <li>
-                <div class="row">
-                  <div class="column-full">
-                    <h3 id="lat-long">
-                      Latitude: 34.04966, Longitude: -118.21131
-                    </h3>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="column-fourth">
-                    <img src="/images/Sunrise.png" class="picture" alt="sdfa" />
-                  </div>
-                  <div class="column-fourth">
-                    <div class="info">
-                      <p id="sunriseApi">6:24AM</p>
-                    </div>
-                  </div>
-                  <div class="column-fourth">
-                    <img src="/images/Sunset.png" class="picture" />
-                  </div>
-                  <div class="column-fourth">
-                    <div class="info">
-                      <p id="sunsetApi">1:35PM</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="column-full">
-                    <div class="description">
-                      <label>Notes About The Sunset &amp; Sunrise:</label>
-                      <br />
-                      <textarea
-                        name="sunset-description"
-                        id="description"
-                        cols="30"
-                        rows="10"></textarea>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="column-full">
-                    <button type="submit" class="add-sunset">Add</button>
-                    <button>Go Back</button>
-                  </div>
-                </div>
+                1. Click<a
+                  href="https://www.freemaptools.com/convert-us-zip-code-to-lat-lng.htm#google_vignette"
+                  >HERE</a
+                >to convert your zipcode to Latitude &amp; Longitude.
+              </li>
+              <li>
+                2. Copy and Paste your Latitude &amp; Longitude and come back to
+                the website.
+              </li>
+              <li>
+                3. Paste it into the search bar and click &quot;Search&quot;.
               </li>
             </ul>
           </div>
         </div>
-      </div>
-      <!-- This is the List Section -->
-      <div data-view="Favorite-Sunsets" class="hidden" id="sunsets-list">
-        <div class="row">
-          <div class="column-half">
-            <div class="sunset-entries"><h2>Favorite Sunsets:</h2></div>
-          </div>
-          <div class="column-half">
-            <div class="new-button-div">
-              <button class="new-button">New</button>
+        <div class="column-full">
+          <input
+            type="text"
+            name="coordinates"
+            placeholder="Latitude &amp; Longitude"
+            id="coordinates"
+            required />
+          <button class="search-button" id="searchBtn">Search</button>
+        </div>
+      </form>
+      <div id="sunset-container">
+        <ul id="sunset-entries">
+          <li>
+            <div class="row">
+              <div class="column-full">
+                <h3 id="lat-long">Latitude: 34.04966, Longitude: -118.21131</h3>
+              </div>
             </div>
-          </div>
+            <div class="row">
+              <div class="column-fourth">
+                <img src="/images/Sunrise.png" class="picture" alt="sdfa" />
+              </div>
+              <div class="column-fourth">
+                <div class="info">
+                  <p id="sunriseApi">6:24AM</p>
+                </div>
+              </div>
+              <div class="column-fourth">
+                <img src="/images/Sunset.png" class="picture" />
+              </div>
+              <div class="column-fourth">
+                <div class="info">
+                  <p id="sunsetApi">1:35PM</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-full">
+                <div class="description">
+                  <label>Notes About The Sunset &amp; Sunrise:</label>
+                  <br />
+                  <textarea
+                    name="sunset-description"
+                    id="description"
+                    cols="30"
+                    rows="10"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-full">
+                <button type="submit" class="addBtn">Add Sunset</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- This is the Favorite List Section -->
+    <div data-view="Favorite-Sunsets" class="hidden" id="sunsets-list">
+      <div class="row">
+        <div class="column-half">
+          <div class="sunset-entries"><h2>Favorite Sunsets:</h2></div>
         </div>
-        <div class="view-container">
-          <div class="view">
-            <ul id="favorite-Sunsets-List"></ul>
+        <div class="column-half">
+          <div class="new-button-div">
+            <button class="new-button">New</button>
           </div>
         </div>
       </div>
-    </main>
+      <div class="view-container">
+        <div class="view">
+          <ul id="favorite-Sunsets-List"></ul>
+        </div>
+      </div>
+    </div>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>

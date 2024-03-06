@@ -46,7 +46,8 @@ input[type='text'] {
 input {
   font-size: 24px;
   border-radius: 7px;
-  height: 112px;
+
+  /* height: 112px; */
 }
 
 .search-button {
@@ -70,7 +71,6 @@ input {
 
 .view {
   display: flex;
-  flex-direction: row;
   justify-content: center;
 }
 
@@ -129,6 +129,11 @@ h1 {
   text-align: center;
 }
 
+#sunset-container {
+  display: flex;
+  justify-content: center;
+}
+
 #sunset-entries {
   border: solid 2px black;
   width: 375px;
@@ -136,6 +141,14 @@ h1 {
   border-radius: 15px;
 }
 
-.column-fourth {
-  flex-basis: 25%;
+/* .column-fourth {
+  flex-basis: 50%;
+} */
+
+.addBtn {
+  font-size: 18px;
+  border-radius: 18px;
+  background-color: rgb(250, 165, 0);
+  color: white;
+  cursor: pointer;
 }
