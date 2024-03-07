@@ -1,0 +1,140 @@
+.hidden {
+  display: none;
+}
+
+body {
+  font-family: 'Sedan SC', sans-serif;
+}
+
+.heading-container {
+  display: flex;
+  font-family: 'Sedan SC', sans-serif;
+  font-size: 28px;
+  border: 2px red solid;
+  background-color: rgb(109, 229, 255);
+  margin: 0 auto;
+}
+
+i {
+  margin-top: 19px;
+  cursor: pointer;
+}
+
+input[type='text'] {
+  text-align: center;
+}
+
+.column-full {
+  min-height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  position: relative;
+}
+
+input {
+  font-size: 24px;
+  border-radius: 7px;
+}
+
+.searchBtn {
+  font-size: 24px;
+  border-radius: 18px;
+  background-color: rgb(250, 165, 0);
+  color: white;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.new-button-div {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.view {
+  display: flex;
+  justify-content: center;
+}
+
+.noSunsetsText {
+  font-family: 'Sedan SC', sans-serif;
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 35px;
+  padding-left: 150px;
+}
+
+.new-button {
+  font-size: 24px;
+  border-radius: 4px;
+  background-color: rgb(250, 165, 0);
+  color: white;
+  cursor: pointer;
+  position: relative;
+  top: 35px;
+  left: 450px;
+}
+
+li {
+  list-style-type: none;
+}
+
+img {
+  width: 130px;
+}
+
+.colum-half {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.adding-icon {
+  position: relative;
+  top: 106px;
+}
+
+a {
+  flex-grow: 1;
+  text-align: center;
+}
+
+h1 {
+  flex-grow: 2;
+  text-align: center;
+}
+
+#sunset-container {
+  display: flex;
+  justify-content: center;
+}
+
+#sunset-info {
+  width: 390px;
+  padding: 0;
+}
+
+.addBtn {
+  font-size: 18px;
+  border-radius: 18px;
+  background-color: rgb(250, 165, 0);
+  color: white;
+  cursor: pointer;
+}
+
+.sunriseApi,
+.sunsetApi {
+  margin-top: -23px;
+}
+
+#sunset-info > li {
+  border: solid 2px black;
+  border-radius: 15px;
+}
