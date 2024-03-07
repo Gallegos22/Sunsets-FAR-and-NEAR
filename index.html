@@ -24,7 +24,7 @@
       </div>
     </div>
     <!-- This is the Form Section -->
-    <div data-view="entry-form" class="">
+    <div data-view="home" class="hidden">
       <form>
         <div class="row">
           <div class="column-full">
@@ -80,7 +80,7 @@
               <div class="column-full">
                 <div class="description">
                   <label>Notes About The Sunset &amp; Sunrise:</label>
-                  <br />
+                  <br/>
                   <textarea
                     name="sunset-description"
                     id="notes"
@@ -99,21 +99,14 @@
       </div>
     </div>
     <!-- This is the Favorite List Section -->
-    <div data-view="Favorite-Sunsets" class="hidden" id="sunsets-list">
+    <div data-view="favorites" class="">
       <div class="row">
-        <div class="column-half">
-          <div class="sunset-entries"><h2>Favorite Sunsets:</h2></div>
+        <div class="column-full">
+          <h2>Favorite Sunsets:</h2>
+          <button class="newBtn">New</button>
         </div>
-        <div class="column-half">
-          <div class="new-button-div">
-            <button class="new-button">New</button>
-          </div>
-        </div>
-      </div>
-      <div class="view-container">
-        <div class="view">
-          <ul id="favorite-Sunsets-List"></ul>
-        </div>
+        <ul id="favorite-Sunsets-List"></ul>
+        <!-- <h2>No Sunsets Have Been Logged</h2> -->
       </div>
     </div>
     <script src="js/data.js"></script>

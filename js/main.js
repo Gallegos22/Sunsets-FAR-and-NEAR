@@ -1,10 +1,17 @@
 'use strict';
+const $homeView = document.querySelector('[data-view="home"]');
+if (!$homeView) throw new Error('The $homeView query failed');
+const $favoriteView = document.querySelector('[data-view="favorites"]');
+if (!$favoriteView) throw new Error('The $favoriteView query failed');
 const $searchButtonForm = document.querySelector('form');
 console.log($searchButtonForm);
 if (!$searchButtonForm) throw new Error('The $searchButtonForm query failed');
 const $cordInput = document.querySelector('input');
 console.log($cordInput);
 if (!$cordInput) throw new Error('The $cordInput query failed');
+let apiData;
+let lat;
+let long;
 const $sunsetInfo = document.querySelector('#sunset-info');
 console.log($sunsetInfo);
 if (!$sunsetInfo) throw new Error('The $sunsetInfo query failed');
@@ -12,9 +19,9 @@ $searchButtonForm.addEventListener('submit', async function (e) {
   e.preventDefault();
   const coordinates = $cordInput.value.trim();
   const latLong = coordinates.split(',');
-  const lat = Number(latLong[0]);
+  lat = Number(latLong[0]);
   console.log(lat);
-  const long = Number(latLong[1]);
+  long = Number(latLong[1]);
   console.log(long);
   if (!coordinates) {
     console.log('Please enter coordinates.');
@@ -28,12 +35,13 @@ $searchButtonForm.addEventListener('submit', async function (e) {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    const apiData = await response.json();
+    apiData = await response.json();
     console.log('data:', apiData);
     $sunsetInfo.append(renderEntry(apiData.results, lat, long));
   } catch (error) {
     console.error('Error fetching breweries:', error);
   }
+  $cordInput.value = '';
 });
 function renderEntry(entry, lat, long) {
   console.log(entry);
@@ -99,3 +107,44 @@ function renderEntry(entry, lat, long) {
   colFull4.append(addBtn);
   return li;
 }
+$sunsetInfo.addEventListener('click', function (e) {
+  const target = e.target;
+  if (target.tagName === 'BUTTON') {
+    // dataObject.entries.push(apiData)
+    console.log('here');
+    console.log(lat);
+    console.log(long);
+    console.log(apiData);
+    const $textArea = document.querySelector('textarea')?.value;
+    console.log($textArea);
+    const newSunset = {
+      lat: lat,
+      long: long,
+      textarea: $textArea,
+      sunrise: apiData.results.sunrise,
+      sunset: apiData.results.sunset,
+    };
+    console.log(newSunset);
+    dataObject.entries.push(newSunset);
+    $sunsetInfo.textContent = '';
+  }
+});
+function viewSwap(view) {
+  if (view === 'home') {
+    $homeView?.classList.remove('hidden');
+    $favoriteView?.classList.add('hidden');
+  } else if (view === 'favorites') {
+    $homeView?.classList.add('hidden');
+    $favoriteView?.classList.remove('hidden');
+  }
+}
+const $newBtnLink = document.querySelector('.newBtn');
+const $favoritesLink = document.querySelector('i');
+$favoritesLink?.addEventListener('click', function () {
+  dataObject.view = 'favorites';
+  viewSwap('favorites');
+});
+$newBtnLink?.addEventListener('click', function () {
+  dataObject.view = 'home';
+  viewSwap('home');
+});
