@@ -24,7 +24,7 @@
       </div>
     </div>
     <!-- This is the Form Section -->
-    <div data-view="home" class="hidden">
+    <div data-view="home" class="">
       <form>
         <div class="row">
           <div class="column-full">
@@ -61,53 +61,55 @@
         </div>
       </form>
       <div id="sunset-container">
-        <ul id="sunset-info">
-          <!-- <li>
-            <div class="row">
-              <div class="column-full">
-                <h3>Latitude: 34.04966 Longitude: -118.21131</h3>
+        <div id="sunset-info" class="hidden">
+          <div class="row">
+            <div class="column-full">
+              <h3 id="heading3">Latitude: 34.04966 Longitude: -118.21131</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <img src="/images/Sunrise.png" />
+              <p class="sunriseApi">6:24AM</p>
+              <img src="/images/Sunset.png" />
+              <p class="sunsetApi">1:35PM</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <div class="description">
+                <label>Notes About The Sunset &amp; Sunrise:</label>
+                <br />
+                <textarea
+                  name="sunset-description"
+                  id="notes"
+                  cols="30"
+                  rows="10"></textarea>
               </div>
             </div>
-            <div class="row">
-              <div class="column-full">
-                <img src="/images/Sunrise.png" />
-                <p class="sunriseApi">6:24AM</p>
-                <img src="/images/Sunset.png" />
-                <p class="sunsetApi">1:35PM</p>
-              </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <button type="button" class="addBtn">Add Sunset</button>
             </div>
-            <div class="row">
-              <div class="column-full">
-                <div class="description">
-                  <label>Notes About The Sunset &amp; Sunrise:</label>
-                  <br/>
-                  <textarea
-                    name="sunset-description"
-                    id="notes"
-                    cols="30"
-                    rows="10"></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="column-full">
-                <button class="addBtn">Add Sunset</button>
-              </div>
-            </div>
-          </li> -->
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
     <!-- This is the Favorite List Section -->
-    <div data-view="favorites" class="">
+    <div data-view="favorites" class="hidden">
       <div class="row">
         <div class="column-full">
           <h2>Favorite Sunsets:</h2>
           <button class="newBtn">New</button>
         </div>
-        <ul id="favorite-Sunsets-List"></ul>
-        <!-- <h2>No Sunsets Have Been Logged</h2> -->
       </div>
+      <div class="row">
+        <div class="column-full">
+          <ul id="favoritesList" class="favoritesList"></ul>
+        </div>
+      </div>
+      <!-- <h2>No Sunsets Have Been Logged</h2> -->
     </div>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>

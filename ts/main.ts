@@ -1,12 +1,21 @@
 const $homeView = document.querySelector('[data-view="home"]');
 if (!$homeView) throw new Error('The $homeView query failed');
 
+const $heading3 = document.querySelector('#heading3');
+if (!$heading3) throw new Error('The $heading3 query failed');
+
 const $favoriteView = document.querySelector('[data-view="favorites"]');
 if (!$favoriteView) throw new Error('The $favoriteView query failed');
 
 const $searchButtonForm = document.querySelector('form');
 console.log($searchButtonForm);
 if (!$searchButtonForm) throw new Error('The $searchButtonForm query failed');
+
+const $sunriseApi = document.querySelector('.sunriseApi');
+if (!$sunriseApi) throw new Error('The $sunriseApi query failed');
+
+const $sunsetApi = document.querySelector('.sunsetApi');
+if (!$sunsetApi) throw new Error('The $sunsetApi query failed');
 
 const $cordInput = document.querySelector('input');
 console.log($cordInput);
@@ -16,8 +25,15 @@ let lat: number;
 let long: number;
 
 const $sunsetInfo = document.querySelector('#sunset-info');
-console.log($sunsetInfo);
 if (!$sunsetInfo) throw new Error('The $sunsetInfo query failed');
+
+const $favoritesList = document.querySelector('#favoritesList');
+if (!$favoritesList) throw new Error('The $favoritesList query failed');
+
+const $addSunsetBtn = document.querySelector('.addBtn');
+if (!$addSunsetBtn) throw new Error('The $addSunsetBtn query failed');
+
+favoriteSunsetGenerator();
 
 $searchButtonForm.addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -41,16 +57,85 @@ $searchButtonForm.addEventListener('submit', async function (e) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     apiData = await response.json();
-    console.log('data:', apiData);
-    $sunsetInfo.append(renderEntry(apiData.results, lat, long));
+    renderEntry(apiData.results, lat, long);
   } catch (error) {
     console.error('Error fetching breweries:', error);
   }
   $cordInput.value = '';
+
+  $sunsetInfo.classList.remove('hidden');
 });
 
-function renderEntry(entry: Entry, lat: number, long: number): HTMLLIElement {
-  console.log(entry);
+function renderEntry(entry: Entry, lat: number, long: number): void {
+  if (!$heading3 || !$sunriseApi || !$sunsetApi)
+    throw new Error('The queries for the API info are undefined');
+  $heading3.textContent = `Latitude: ${lat}  Longitude: ${long}`;
+
+  $sunriseApi.textContent = entry.sunrise;
+
+  $sunsetApi.textContent = entry.sunset;
+}
+
+$addSunsetBtn.addEventListener('click', function (): void {
+  // dataObject.entries.push(apiData)
+  const $textArea = document.querySelector('#notes') as HTMLTextAreaElement;
+  console.log($textArea?.value);
+
+  const newSunset: Entry = {
+    lat,
+    long,
+    textarea: $textArea.value,
+    sunrise: apiData.results.sunrise,
+    sunset: apiData.results.sunset,
+  };
+
+  dataObject.entries.push(newSunset);
+  // $sunsetInfo.textContent = '';
+  $favoritesList.append(renderFavoriteSunset(newSunset));
+
+  $textArea.value = '';
+
+  $sunsetInfo.classList.add('hidden');
+});
+
+function viewSwap(view: string): void {
+  // creating a view swap function
+  if (view === 'home') {
+    $homeView?.classList.remove('hidden');
+    $favoriteView?.classList.add('hidden');
+  } else if (view === 'favorites') {
+    $homeView?.classList.add('hidden');
+    $favoriteView?.classList.remove('hidden');
+    $sunsetInfo?.classList.add('hidden');
+  }
+}
+
+const $newBtnLink = document.querySelector('.newBtn');
+
+const $favoritesLink = document.querySelector('i');
+
+$favoritesLink?.addEventListener('click', function () {
+  dataObject.view = 'favorites';
+  viewSwap('favorites');
+});
+
+$newBtnLink?.addEventListener('click', function () {
+  dataObject.view = 'home';
+  viewSwap('home');
+});
+
+function favoriteSunsetGenerator(): void {
+  // loop over data.entries. That is where you stored your sunsets when the user saved them on main page
+  for (let i = 0; i < dataObject.entries.length; i++) {
+    // render a DOM tree for each of the sunsets in data.entries
+    const favSunset = renderFavoriteSunset(dataObject.entries[i]);
+    // append that DOM tree to the ul element
+    $favoritesList?.append(favSunset);
+  }
+}
+
+function renderFavoriteSunset(entry: Entry): any {
+  console.log('RenderFavoriteSunset:', entry);
   const li = document.createElement('li');
 
   const row1 = document.createElement('div');
@@ -62,7 +147,7 @@ function renderEntry(entry: Entry, lat: number, long: number): HTMLLIElement {
   row1.append(colFull1);
 
   const heading3 = document.createElement('h3');
-  heading3.textContent = `Latitude: ${lat}  Longitude: ${long}`;
+  heading3.textContent = `Latitude: ${entry.lat}  Longitude: ${entry.long}`;
   colFull1.append(heading3);
 
   const row2 = document.createElement('div');
@@ -115,6 +200,7 @@ function renderEntry(entry: Entry, lat: number, long: number): HTMLLIElement {
   textArea.setAttribute('id', 'notes');
   textArea.setAttribute('cols', '30');
   textArea.setAttribute('rows', '10');
+  textArea.value = entry.textarea ?? ''; // using nullish coalescing operator to make sure it isn't null or undefined, If it is pass in empty string
   description.append(textArea);
 
   const row4 = document.createElement('div');
@@ -132,56 +218,3 @@ function renderEntry(entry: Entry, lat: number, long: number): HTMLLIElement {
 
   return li;
 }
-
-$sunsetInfo.addEventListener('click', function (e): void {
-  const target = e.target as Element;
-
-  if (target.tagName === 'BUTTON') {
-    // dataObject.entries.push(apiData)
-    console.log('here');
-    console.log(lat);
-    console.log(long);
-    console.log(apiData);
-
-    const $textArea = document.querySelector('textarea')?.value;
-    console.log($textArea);
-
-    const newSunset: Entry = {
-      lat,
-      long,
-      textarea: $textArea,
-      sunrise: apiData.results.sunrise,
-      sunset: apiData.results.sunset,
-    };
-
-    console.log(newSunset);
-
-    dataObject.entries.push(newSunset);
-    $sunsetInfo.textContent = '';
-  }
-});
-
-function viewSwap(view: string): void {
-  // creating a view swap function
-  if (view === 'home') {
-    $homeView?.classList.remove('hidden');
-    $favoriteView?.classList.add('hidden');
-  } else if (view === 'favorites') {
-    $homeView?.classList.add('hidden');
-    $favoriteView?.classList.remove('hidden');
-  }
-}
-
-const $newBtnLink = document.querySelector('.newBtn');
-
-const $favoritesLink = document.querySelector('i');
-
-$favoritesLink?.addEventListener('click', function () {
-  dataObject.view = 'favorites';
-  viewSwap('favorites');
-});
-
-$newBtnLink?.addEventListener('click', function () {
-  dataObject.view = 'home';
-  viewSwap('home');
-});

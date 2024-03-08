@@ -117,6 +117,8 @@ h1 {
 #sunset-info {
   width: 390px;
   padding: 0;
+  border: solid 2px black;
+  border-radius: 15px;
 }
 
 .addBtn {
@@ -132,7 +134,10 @@ h1 {
   margin-top: -23px;
 }
 
-#sunset-info > li {
+.favoritesList > li {
+  margin-top: 10px;
   border: solid 2px black;
   border-radius: 15px;
+  padding: 0;
+  width: 390px;
 }
