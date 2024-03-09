@@ -24,6 +24,10 @@ const $favoritesList = document.querySelector('#favoritesList');
 if (!$favoritesList) throw new Error('The $favoritesList query failed');
 const $addSunsetBtn = document.querySelector('.addBtn');
 if (!$addSunsetBtn) throw new Error('The $addSunsetBtn query failed');
+console.log('addBtn:', $addSunsetBtn);
+const $editBtn = document.querySelector('.editBtn');
+if (!$editBtn) throw new Error('The $editBtn query failed');
+console.log($editBtn);
 favoriteSunsetGenerator();
 $searchButtonForm.addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -82,10 +86,13 @@ function viewSwap(view) {
   if (view === 'home') {
     $homeView?.classList.remove('hidden');
     $favoriteView?.classList.add('hidden');
+    // $addSunsetBtn?.classList.remove('hidden')
+    $editBtn?.classList.add('hidden');
   } else if (view === 'favorites') {
     $homeView?.classList.add('hidden');
     $favoriteView?.classList.remove('hidden');
     $sunsetInfo?.classList.add('hidden');
+    // $addSunsetBtn?.classList.add('hidden')
   }
 }
 const $newBtnLink = document.querySelector('.newBtn');
@@ -166,9 +173,9 @@ function renderFavoriteSunset(entry) {
   const colFull4 = document.createElement('div');
   colFull4.setAttribute('class', 'column-full');
   row4.append(colFull4);
-  const addBtn = document.createElement('button');
-  addBtn.setAttribute('class', 'addBtn');
-  addBtn.textContent = 'Add Sunset';
-  colFull4.append(addBtn);
+  const editBtn = document.createElement('button');
+  editBtn.setAttribute('class', 'editBtn');
+  editBtn.textContent = 'Edit Sunset';
+  colFull4.append(editBtn);
   return li;
 }

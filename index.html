@@ -24,7 +24,7 @@
       </div>
     </div>
     <!-- This is the Form Section -->
-    <div data-view="home" class="">
+    <div data-view="home" class="hidden">
       <form>
         <div class="row">
           <div class="column-full">
@@ -91,13 +91,14 @@
           <div class="row">
             <div class="column-full">
               <button type="button" class="addBtn">Add Sunset</button>
+              <button class="editBtn">Edit Sunset</button>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- This is the Favorite List Section -->
-    <div data-view="favorites" class="hidden">
+    <div data-view="favorites" class="">
       <div class="row">
         <div class="column-full">
           <h2>Favorite Sunsets:</h2>
@@ -109,7 +110,7 @@
           <ul id="favoritesList" class="favoritesList"></ul>
         </div>
       </div>
-      <!-- <h2>No Sunsets Have Been Logged</h2> -->
+      <h3 class="no-sunsets">No Sunsets Have Been Logged..</h3>
     </div>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
