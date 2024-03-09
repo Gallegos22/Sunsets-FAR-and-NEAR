@@ -38,6 +38,9 @@ const $editBtn = document.querySelector('.editBtn');
 if (!$editBtn) throw new Error('The $editBtn query failed');
 console.log($editBtn);
 
+const $noSunsets = document.querySelector('.no-sunsets');
+if (!$noSunsets) throw new Error('The $noSunsets query failed');
+
 favoriteSunsetGenerator();
 
 $searchButtonForm.addEventListener('submit', async function (e) {
@@ -109,7 +112,7 @@ function viewSwap(view: string): void {
     $homeView?.classList.remove('hidden');
     $favoriteView?.classList.add('hidden');
     // $addSunsetBtn?.classList.remove('hidden')
-    $editBtn?.classList.add('hidden');
+    // $editBtn?.classList.add('hidden');
   } else if (view === 'favorites') {
     $homeView?.classList.add('hidden');
     $favoriteView?.classList.remove('hidden');
@@ -226,3 +229,33 @@ function renderFavoriteSunset(entry: Entry): any {
 
   return li;
 }
+
+// function toggleNoEntries() :void {
+//   if (dataObject.entries.length === 0 ) {
+//     $noSunsets?.classList.remove('no-sunsets')
+//   } else {
+//     $noSunsets?.classList.add('no-sunsets')
+//   }
+// }
+
+console.dir('$editBtn:,', $editBtn);
+
+$editBtn.addEventListener('click', (event: Event) => {
+  const $eventTarget = event.target as HTMLElement;
+
+  if ($eventTarget.className !== 'editBtn') {
+    return;
+  }
+
+  // const entryId = dataObject.nextEntryId
+
+  // for (let i =0; i < dataObject.entries.length; i++) {
+  //   if (dataObject.entries[i].entryId === entryId) {
+  //     dataObject.editing = dataObject.entries[i];
+  //   }
+  // }
+
+  viewSwap('home');
+
+  // const $
+});
