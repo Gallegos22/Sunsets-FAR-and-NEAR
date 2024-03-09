@@ -2,6 +2,10 @@
   display: none;
 }
 
+/* .no-sunsets {
+  display: none;
+} */
+
 body {
   font-family: 'Sedan SC', sans-serif;
 }
@@ -51,11 +55,11 @@ input {
   justify-content: center;
 }
 
-.new-button-div {
+/* .new-button-div {
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
-}
+} */
 
 .view {
   display: flex;
@@ -72,15 +76,13 @@ h2 {
   padding-left: 150px;
 }
 
-.new-button {
+.newBtn {
   font-size: 24px;
   border-radius: 4px;
   background-color: rgb(250, 165, 0);
   color: white;
   cursor: pointer;
-  position: relative;
-  top: 35px;
-  left: 450px;
+  margin-left: 30%;
 }
 
 li {
@@ -119,6 +121,8 @@ h1 {
 #sunset-info {
   width: 390px;
   padding: 0;
+  border: solid 2px black;
+  border-radius: 15px;
 }
 
 .addBtn {
@@ -134,7 +138,10 @@ h1 {
   margin-top: -23px;
 }
 
-#sunset-info > li {
+.favoritesList > li {
+  margin-top: 10px;
   border: solid 2px black;
   border-radius: 15px;
+  padding: 0;
+  width: 390px;
 }

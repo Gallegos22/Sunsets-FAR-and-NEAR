@@ -1,14 +1,15 @@
 'use strict';
-/* exported data */
-// interface Data {
-//   view: 'entries' | 'entry-form';
-//   entries: Entry [];
-//   editing: null | Entry
-//   nextEntryId: number
-// }
-// let data : Data = {
-//   view: 'entry-form',
-//   entries: [],
-//   editing: null,
-//   nextEntryId: 1
-// }
+let dataObject = {
+  view: '',
+  entries: [],
+  editing: null,
+  nextEntryId: 1,
+};
+window.addEventListener('beforeunload', () => {
+  const sunsetsJSON = JSON.stringify(dataObject);
+  localStorage.setItem('sunsets-local-storage', sunsetsJSON);
+});
+const previousSunsetJSON = localStorage.getItem('sunsets-local-storage');
+if (previousSunsetJSON != null) {
+  dataObject = JSON.parse(previousSunsetJSON);
+}
