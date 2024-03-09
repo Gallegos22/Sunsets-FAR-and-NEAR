@@ -84,17 +84,20 @@ $addSunsetBtn.addEventListener('click', function () {
   $sunsetInfo.classList.add('hidden');
 });
 function viewSwap(view) {
+  console.log('This is my viewSwap  function');
   // creating a view swap function
   if (view === 'home') {
+    console.log('I am here at home');
     $homeView?.classList.remove('hidden');
     $favoriteView?.classList.add('hidden');
-    // $addSunsetBtn?.classList.remove('hidden')
-    // $editBtn?.classList.add('hidden');
+    $addSunsetBtn?.classList.remove('hidden');
+    $editBtn?.classList.add('hidden');
   } else if (view === 'favorites') {
+    console.log('I am here at favorites');
     $homeView?.classList.add('hidden');
     $favoriteView?.classList.remove('hidden');
     $sunsetInfo?.classList.add('hidden');
-    // $addSunsetBtn?.classList.add('hidden')
+    $addSunsetBtn?.classList.add('hidden');
   }
 }
 const $newBtnLink = document.querySelector('.newBtn');
@@ -194,12 +197,12 @@ $editBtn.addEventListener('click', (event) => {
   if ($eventTarget.className !== 'editBtn') {
     return;
   }
-  const entryId = dataObject.nextEntryId;
-  for (let i = 0; i < dataObject.entries.length; i++) {
-    if (dataObject.entries[i].entryId === entryId) {
-      dataObject.editing = dataObject.entries[i];
-    }
-  }
+  // const entryId = dataObject.nextEntryId
+  // for (let i =0; i < dataObject.entries.length; i++) {
+  //   if (dataObject.entries[i].entryId === entryId) {
+  //     dataObject.editing = dataObject.entries[i];
+  //   }
+  // }
   viewSwap('home');
   // const $
 });

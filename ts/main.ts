@@ -107,17 +107,20 @@ $addSunsetBtn.addEventListener('click', function (): void {
 });
 
 function viewSwap(view: string): void {
+  console.log('This is my viewSwap  function');
   // creating a view swap function
   if (view === 'home') {
+    console.log('I am here at home');
     $homeView?.classList.remove('hidden');
     $favoriteView?.classList.add('hidden');
-    // $addSunsetBtn?.classList.remove('hidden')
-    // $editBtn?.classList.add('hidden');
+    $addSunsetBtn?.classList.remove('hidden');
+    $editBtn?.classList.add('hidden');
   } else if (view === 'favorites') {
+    console.log('I am here at favorites');
     $homeView?.classList.add('hidden');
     $favoriteView?.classList.remove('hidden');
     $sunsetInfo?.classList.add('hidden');
-    // $addSunsetBtn?.classList.add('hidden')
+    $addSunsetBtn?.classList.add('hidden');
   }
 }
 
