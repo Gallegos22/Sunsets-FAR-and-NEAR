@@ -165,6 +165,8 @@ $addSunsetBtn.addEventListener('click', function (): void {
   // $sunsetInfo.textContent = '';
   // $textArea.textContent = ''
   // $favoritesList.append(renderFavoriteSunset(newSunset));
+  console.log(newSunset);
+  dataObject.nextEntryId++;
   dataObject.entries.unshift(newSunset);
   // $sunsetInfo.textContent = '';
   $favoritesList.append(renderFavoriteSunset(newSunset));
