@@ -1,12 +1,4 @@
 /* exported data */
-interface Entry {
-  lat: number;
-  long: number;
-  textarea: string | undefined | null;
-  sunset: string;
-  sunrise: string;
-}
-
 interface Data {
   view: string;
   entries: Entry[];
