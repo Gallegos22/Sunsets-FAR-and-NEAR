@@ -1,3 +1,12 @@
+interface Entry {
+  lat: number;
+  long: number;
+  textarea: string | undefined | null;
+  sunset: string;
+  sunrise: string;
+  entryId: number;
+}
+
 const $homeView = document.querySelector('[data-view="home"]');
 if (!$homeView) throw new Error('The $homeView query failed');
 
@@ -8,7 +17,6 @@ const $favoriteView = document.querySelector('[data-view="favorites"]');
 if (!$favoriteView) throw new Error('The $favoriteView query failed');
 
 const $searchButtonForm = document.querySelector('form');
-console.log($searchButtonForm);
 if (!$searchButtonForm) throw new Error('The $searchButtonForm query failed');
 
 const $sunriseApi = document.querySelector('.sunriseApi');
@@ -18,8 +26,8 @@ const $sunsetApi = document.querySelector('.sunsetApi');
 if (!$sunsetApi) throw new Error('The $sunsetApi query failed');
 
 const $cordInput = document.querySelector('input');
-console.log($cordInput);
 if (!$cordInput) throw new Error('The $cordInput query failed');
+
 let apiData: any;
 let lat: number;
 let long: number;
@@ -32,25 +40,26 @@ if (!$favoritesList) throw new Error('The $favoritesList query failed');
 
 const $addSunsetBtn = document.querySelector('.addBtn');
 if (!$addSunsetBtn) throw new Error('The $addSunsetBtn query failed');
-console.log('addBtn:', $addSunsetBtn);
-
-const $editBtn = document.querySelector('.editBtn');
-if (!$editBtn) throw new Error('The $editBtn query failed');
-console.log($editBtn);
 
 const $noSunsets = document.querySelector('.no-sunsets');
 if (!$noSunsets) throw new Error('The $noSunsets query failed');
 
-favoriteSunsetGenerator();
+const $textArea = document.getElementById('notes') as HTMLTextAreaElement;
+if (!$textArea) throw new Error('The $textArea query failed');
+
+document.addEventListener('DOMContentLoaded', () => {
+  toggleNoEntries();
+  viewSwap(dataObject.view); // this makes sure that whenever we refresh the page we stay on whatever page we are currently on
+  favoriteSunsetGenerator(); // we are calling this in the begginig because we want to generate every single data in my object
+});
 
 $searchButtonForm.addEventListener('submit', async function (e) {
   e.preventDefault();
+  // $editBtn?.classList.add('hidden');
   const coordinates = $cordInput.value.trim();
   const latLong = coordinates.split(',');
   lat = Number(latLong[0]);
-  console.log(lat);
   long = Number(latLong[1]);
-  console.log(long);
   if (!coordinates) {
     console.log('Please enter coordinates.');
     $sunsetInfo.textContent = 'Please provide coordinates.';
@@ -65,6 +74,7 @@ $searchButtonForm.addEventListener('submit', async function (e) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     apiData = await response.json();
+    console.log('here', apiData);
     renderEntry(apiData.results, lat, long);
   } catch (error) {
     console.error('Error fetching breweries:', error);
@@ -72,9 +82,14 @@ $searchButtonForm.addEventListener('submit', async function (e) {
   $cordInput.value = '';
 
   $sunsetInfo.classList.remove('hidden');
+
+  dataObject.editing = null;
 });
 
 function renderEntry(entry: Entry, lat: number, long: number): void {
+  console.log('entry', entry);
+  console.log('lat', lat);
+  console.log('long', long);
   if (!$heading3 || !$sunriseApi || !$sunsetApi)
     throw new Error('The queries for the API info are undefined');
   $heading3.textContent = `Latitude: ${lat}  Longitude: ${long}`;
@@ -85,9 +100,8 @@ function renderEntry(entry: Entry, lat: number, long: number): void {
 }
 
 $addSunsetBtn.addEventListener('click', function (): void {
-  // dataObject.entries.push(apiData)
-  const $textArea = document.querySelector('#notes') as HTMLTextAreaElement;
-  console.log($textArea?.value);
+  toggleNoEntries();
+  console.log('here');
 
   const newSunset: Entry = {
     lat,
@@ -95,11 +109,13 @@ $addSunsetBtn.addEventListener('click', function (): void {
     textarea: $textArea.value,
     sunrise: apiData.results.sunrise,
     sunset: apiData.results.sunset,
+    entryId: dataObject.nextEntryId,
   };
 
-  dataObject.entries.push(newSunset);
-  // $sunsetInfo.textContent = '';
-  $favoritesList.append(renderFavoriteSunset(newSunset));
+  console.log(newSunset);
+  dataObject.nextEntryId++;
+  dataObject.entries.unshift(newSunset);
+  $favoritesList.prepend(renderFavoriteSunset(newSunset)); //
 
   $textArea.value = '';
 
@@ -107,16 +123,13 @@ $addSunsetBtn.addEventListener('click', function (): void {
 });
 
 function viewSwap(view: string): void {
-  console.log('This is my viewSwap  function');
-  // creating a view swap function
   if (view === 'home') {
-    console.log('I am here at home');
+    dataObject.view = 'home';
     $homeView?.classList.remove('hidden');
     $favoriteView?.classList.add('hidden');
     $addSunsetBtn?.classList.remove('hidden');
-    $editBtn?.classList.add('hidden');
   } else if (view === 'favorites') {
-    console.log('I am here at favorites');
+    dataObject.view = 'favorites';
     $homeView?.classList.add('hidden');
     $favoriteView?.classList.remove('hidden');
     $sunsetInfo?.classList.add('hidden');
@@ -129,16 +142,17 @@ const $newBtnLink = document.querySelector('.newBtn');
 const $favoritesLink = document.querySelector('i');
 
 $favoritesLink?.addEventListener('click', function () {
-  dataObject.view = 'favorites';
+  toggleNoEntries();
   viewSwap('favorites');
 });
 
 $newBtnLink?.addEventListener('click', function () {
-  dataObject.view = 'home';
   viewSwap('home');
+  $textArea.textContent = '';
 });
 
 function favoriteSunsetGenerator(): void {
+  // this function only calls once, when we first load the page (or refresh it) it checks what we have in  our dataObject entries array and renders it if anything is inside
   // loop over data.entries. That is where you stored your sunsets when the user saved them on main page
   for (let i = 0; i < dataObject.entries.length; i++) {
     // render a DOM tree for each of the sunsets in data.entries
@@ -148,9 +162,10 @@ function favoriteSunsetGenerator(): void {
   }
 }
 
-function renderFavoriteSunset(entry: Entry): any {
-  console.log('RenderFavoriteSunset:', entry);
+function renderFavoriteSunset(entry: Entry): HTMLLIElement {
   const li = document.createElement('li');
+  li.setAttribute('class', 'listed-Item');
+  li.setAttribute('data-entry-id', entry.entryId.toString());
 
   const row1 = document.createElement('div');
   row1.setAttribute('class', 'row');
@@ -225,6 +240,11 @@ function renderFavoriteSunset(entry: Entry): any {
   colFull4.setAttribute('class', 'column-full');
   row4.append(colFull4);
 
+  const deleteBtn = document.createElement('button');
+  deleteBtn.setAttribute('class', 'deleteBtn');
+  deleteBtn.textContent = 'Delete Sunset';
+  colFull4.append(deleteBtn);
+
   const editBtn = document.createElement('button');
   editBtn.setAttribute('class', 'editBtn');
   editBtn.textContent = 'Edit Sunset';
@@ -233,32 +253,70 @@ function renderFavoriteSunset(entry: Entry): any {
   return li;
 }
 
-// function toggleNoEntries() :void {
-//   if (dataObject.entries.length === 0 ) {
-//     $noSunsets?.classList.remove('no-sunsets')
-//   } else {
-//     $noSunsets?.classList.add('no-sunsets')
-//   }
-// }
+function toggleNoEntries(): void {
+  if (dataObject.entries.length === 0) {
+    $noSunsets?.classList.remove('no-sunsets');
+  } else {
+    $noSunsets?.classList.add('no-sunsets');
+  }
+}
 
-console.dir('$editBtn:,', $editBtn);
+const $dismissModal = document.querySelector('.dismiss-modal');
+if (!$dismissModal) throw new Error('The $dismiss query failed');
 
-$editBtn.addEventListener('click', (event: Event) => {
+const $dialog = document.querySelector('dialog');
+if (!$dialog) throw new Error('The $dialog query failed');
+
+$favoritesList.addEventListener('click', (event: Event) => {
   const $eventTarget = event.target as HTMLElement;
 
   if ($eventTarget.className !== 'editBtn') {
     return;
   }
 
-  // const entryId = dataObject.nextEntryId
+  const $closestLi = $eventTarget.closest('[data-entry-id]') as HTMLLIElement;
+  console.log($closestLi);
+  const $textArea = $closestLi.querySelector('textarea');
+  console.log($textArea);
+  if (!$closestLi) throw new Error('The $closestLi query failed');
 
-  // for (let i =0; i < dataObject.entries.length; i++) {
-  //   if (dataObject.entries[i].entryId === entryId) {
-  //     dataObject.editing = dataObject.entries[i];
-  //   }
-  // }
+  const entryId = Number($closestLi.dataset.entryId);
 
-  viewSwap('home');
+  for (let i = 0; i < dataObject.entries.length; i++) {
+    if (dataObject.entries[i].entryId === entryId) {
+      console.log('string matched');
+      dataObject.entries[i].textarea = $textArea?.value;
+      console.log('dataObject.entries[i]:', dataObject.entries[i]);
+      console.log($textArea?.value);
+    }
+  }
+  $dialog.showModal();
+});
 
-  // const $
+$dismissModal.addEventListener('click', () => {
+  $dialog.close();
+});
+
+$favoritesList.addEventListener('click', (event: Event) => {
+  const $eventTarget = event.target as HTMLElement;
+
+  if ($eventTarget.className !== 'deleteBtn') {
+    return;
+  }
+
+  const $closestLi = $eventTarget.closest('[data-entry-id]') as HTMLLIElement;
+  console.log($closestLi);
+
+  const entryId = Number($closestLi.dataset.entryId);
+
+  for (let i = 0; i < dataObject.entries.length; i++) {
+    if (dataObject.entries[i].entryId === entryId) {
+      dataObject.entries.splice(i, 1);
+    }
+  }
+  $closestLi.remove();
+
+  if (dataObject.entries.length === 0) {
+    toggleNoEntries();
+  }
 });
