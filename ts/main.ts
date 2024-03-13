@@ -54,6 +54,7 @@ const $saveBtn = document.querySelector('.saveBtn');
 if (!$saveBtn) throw new Error('The $saveBtn query failed');
 
 document.addEventListener('DOMContentLoaded', () => {
+  toggleNoEntries();
   viewSwap(dataObject.view); // this makes sure that whenever we refresh the page we stay on whatever page we are currently on
   favoriteSunsetGenerator(); // we are calling this in the begginig because we want to generate every single data in my object
 });
@@ -108,6 +109,7 @@ function renderEntry(entry: Entry, lat: number, long: number): void {
 }
 
 $addSunsetBtn.addEventListener('click', function (): void {
+  toggleNoEntries();
   console.log('here');
   // viewSwap('favorites')
 
@@ -192,6 +194,7 @@ const $newBtnLink = document.querySelector('.newBtn');
 const $favoritesLink = document.querySelector('i');
 
 $favoritesLink?.addEventListener('click', function () {
+  toggleNoEntries();
   // dataObject.view = 'favorites';
   viewSwap('favorites');
   // favoriteSunsetGenerator()
@@ -300,13 +303,13 @@ function renderFavoriteSunset(entry: Entry): HTMLLIElement {
   return li;
 }
 
-// function toggleNoEntries() :void {
-//   if (dataObject.entries.length === 0 ) {
-//     $noSunsets?.classList.remove('no-sunsets')
-//   } else {
-//     $noSunsets?.classList.add('no-sunsets')
-//   }
-// }
+function toggleNoEntries(): void {
+  if (dataObject.entries.length === 0) {
+    $noSunsets?.classList.remove('no-sunsets');
+  } else {
+    $noSunsets?.classList.add('no-sunsets');
+  }
+}
 
 $favoritesList.addEventListener('click', (event: Event) => {
   const $eventTarget = event.target as HTMLElement;

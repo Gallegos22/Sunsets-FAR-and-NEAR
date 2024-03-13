@@ -31,6 +31,7 @@ if (!$textArea) throw new Error('The $textArea query failed');
 const $saveBtn = document.querySelector('.saveBtn');
 if (!$saveBtn) throw new Error('The $saveBtn query failed');
 document.addEventListener('DOMContentLoaded', () => {
+  toggleNoEntries();
   viewSwap(dataObject.view); // this makes sure that whenever we refresh the page we stay on whatever page we are currently on
   favoriteSunsetGenerator(); // we are calling this in the begginig because we want to generate every single data in my object
 });
@@ -76,6 +77,7 @@ function renderEntry(entry, lat, long) {
   $sunsetApi.textContent = entry.sunset;
 }
 $addSunsetBtn.addEventListener('click', function () {
+  toggleNoEntries();
   console.log('here');
   // viewSwap('favorites')
   // dataObject.entries.push(apiData)
@@ -147,6 +149,7 @@ function viewSwap(view) {
 const $newBtnLink = document.querySelector('.newBtn');
 const $favoritesLink = document.querySelector('i');
 $favoritesLink?.addEventListener('click', function () {
+  toggleNoEntries();
   // dataObject.view = 'favorites';
   viewSwap('favorites');
   // favoriteSunsetGenerator()
@@ -157,6 +160,7 @@ $newBtnLink?.addEventListener('click', function () {
   $textArea.textContent = '';
 });
 function favoriteSunsetGenerator() {
+  // this function only calls once, when we first load the page (or refresh it) it checks what we have in  our dataObject entries array and renders it if anything is inside
   // loop over data.entries. That is where you stored your sunsets when the user saved them on main page
   for (let i = 0; i < dataObject.entries.length; i++) {
     // render a DOM tree for each of the sunsets in data.entries
@@ -231,13 +235,13 @@ function renderFavoriteSunset(entry) {
   colFull4.append(editBtn);
   return li;
 }
-// function toggleNoEntries() :void {
-//   if (dataObject.entries.length === 0 ) {
-//     $noSunsets?.classList.remove('no-sunsets')
-//   } else {
-//     $noSunsets?.classList.add('no-sunsets')
-//   }
-// }
+function toggleNoEntries() {
+  if (dataObject.entries.length === 0) {
+    $noSunsets?.classList.remove('no-sunsets');
+  } else {
+    $noSunsets?.classList.add('no-sunsets');
+  }
+}
 $favoritesList.addEventListener('click', (event) => {
   const $eventTarget = event.target;
   if ($eventTarget.className !== 'editBtn') {
