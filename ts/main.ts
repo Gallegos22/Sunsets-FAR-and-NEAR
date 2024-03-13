@@ -53,7 +53,10 @@ if (!$textArea) throw new Error('The $textArea query failed');
 const $saveBtn = document.querySelector('.saveBtn');
 if (!$saveBtn) throw new Error('The $saveBtn query failed');
 
-favoriteSunsetGenerator();
+document.addEventListener('DOMContentLoaded', () => {
+  viewSwap(dataObject.view); // this makes sure that whenever we refresh the page we stay on whatever page we are currently on
+  favoriteSunsetGenerator(); // we are calling this in the begginig because we want to generate every single data in my object
+});
 
 $searchButtonForm.addEventListener('submit', async function (e) {
   e.preventDefault();
@@ -90,14 +93,6 @@ $searchButtonForm.addEventListener('submit', async function (e) {
 
   // $textArea.value = ''
 });
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   viewSwap(dataObject.view)
-
-//   for (let i = 0; i < dataObject.entries.length; i++) {
-//     $favoritesList.append(renderFavoriteSunset(dataObject.entries[i]))
-//   }
-// })
 
 function renderEntry(entry: Entry, lat: number, long: number): void {
   console.log('entry', entry);
@@ -169,7 +164,7 @@ $addSunsetBtn.addEventListener('click', function (): void {
   dataObject.nextEntryId++;
   dataObject.entries.unshift(newSunset);
   // $sunsetInfo.textContent = '';
-  $favoritesList.append(renderFavoriteSunset(newSunset));
+  $favoritesList.prepend(renderFavoriteSunset(newSunset)); //
 
   $textArea.value = '';
 
@@ -179,10 +174,12 @@ $addSunsetBtn.addEventListener('click', function (): void {
 function viewSwap(view: string): void {
   // creating a view swap function
   if (view === 'home') {
+    dataObject.view = 'home';
     $homeView?.classList.remove('hidden');
     $favoriteView?.classList.add('hidden');
     $addSunsetBtn?.classList.remove('hidden');
   } else if (view === 'favorites') {
+    dataObject.view = 'favorites';
     $homeView?.classList.add('hidden');
     $favoriteView?.classList.remove('hidden');
     $sunsetInfo?.classList.add('hidden');
@@ -207,6 +204,7 @@ $newBtnLink?.addEventListener('click', function () {
 });
 
 function favoriteSunsetGenerator(): void {
+  // this function only calls once, when we first load the page (or refresh it) it checks what we have in  our dataObject entries array and renders it if anything is inside
   // loop over data.entries. That is where you stored your sunsets when the user saved them on main page
   for (let i = 0; i < dataObject.entries.length; i++) {
     // render a DOM tree for each of the sunsets in data.entries
