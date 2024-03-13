@@ -41,9 +41,6 @@ if (!$favoritesList) throw new Error('The $favoritesList query failed');
 const $addSunsetBtn = document.querySelector('.addBtn');
 if (!$addSunsetBtn) throw new Error('The $addSunsetBtn query failed');
 
-// const $editBtn = document.querySelector('.editBtn');
-// if (!$editBtn) throw new Error('The $editBtn query failed');
-
 const $noSunsets = document.querySelector('.no-sunsets');
 if (!$noSunsets) throw new Error('The $noSunsets query failed');
 
@@ -87,8 +84,6 @@ $searchButtonForm.addEventListener('submit', async function (e) {
   $sunsetInfo.classList.remove('hidden');
 
   dataObject.editing = null;
-
-  // $textArea.value = ''
 });
 
 function renderEntry(entry: Entry, lat: number, long: number): void {
@@ -107,9 +102,6 @@ function renderEntry(entry: Entry, lat: number, long: number): void {
 $addSunsetBtn.addEventListener('click', function (): void {
   toggleNoEntries();
   console.log('here');
-  // viewSwap('favorites')
-
-  // dataObject.entries.push(apiData)
 
   const newSunset: Entry = {
     lat,
@@ -120,48 +112,9 @@ $addSunsetBtn.addEventListener('click', function (): void {
     entryId: dataObject.nextEntryId,
   };
 
-  // if (dataObject.editing === null) {
-  //   dataObject.nextEntryId++;
-  //   dataObject.entries.unshift(newSunset);
-  //   // console.log('newSunset:', newSunset)
-  //   // $favoritesList.prepend(newSunset)
-  //    for (let i = 0; i < dataObject.entries.length; i++) {
-  //   // render a DOM tree for each of the sunsets in data.entries
-  //   const favSunset = renderFavoriteSunset(dataObject.entries[i]);
-  //   // append that DOM tree to the ul element
-  //   $favoritesList?.append(favSunset);
-  // }
-  // } else {
-  //   newSunset.entryId = dataObject.editing.entryId
-  //   const newEntries: Entry[] = [];
-  //   for (let i = 0; i < dataObject.entries.length; i++) {
-  //     if (dataObject.entries[i].entryId === newSunset.entryId) {
-  //       newEntries.push(newSunset)
-  //     } else {
-  //       newEntries.push(dataObject.entries[i]);
-  //     }
-  //   }
-  //   dataObject.entries = newEntries
-  // }
-
-  // const $listedItem = document.querySelector('.listed-Item')
-  // if (!$listedItem) throw new Error('The $listedItem query failed')
-
-  // for (const li of $listedItem) {
-
-  //   if (Number(li.getAttribute('data-entry-id')) === dataObject.editing?.entryId) {
-  //     li.replaceWith(renderFavoriteSunset(newSunset))
-  //   }
-  // }
-
-  // dataObject.entries.push(newSunset);
-  // $sunsetInfo.textContent = '';
-  // $textArea.textContent = ''
-  // $favoritesList.append(renderFavoriteSunset(newSunset));
   console.log(newSunset);
   dataObject.nextEntryId++;
   dataObject.entries.unshift(newSunset);
-  // $sunsetInfo.textContent = '';
   $favoritesList.prepend(renderFavoriteSunset(newSunset)); //
 
   $textArea.value = '';
@@ -170,7 +123,6 @@ $addSunsetBtn.addEventListener('click', function (): void {
 });
 
 function viewSwap(view: string): void {
-  // creating a view swap function
   if (view === 'home') {
     dataObject.view = 'home';
     $homeView?.classList.remove('hidden');
@@ -191,13 +143,10 @@ const $favoritesLink = document.querySelector('i');
 
 $favoritesLink?.addEventListener('click', function () {
   toggleNoEntries();
-  // dataObject.view = 'favorites';
   viewSwap('favorites');
-  // favoriteSunsetGenerator()
 });
 
 $newBtnLink?.addEventListener('click', function () {
-  // dataObject.view = 'home';
   viewSwap('home');
   $textArea.textContent = '';
 });
@@ -312,32 +261,40 @@ function toggleNoEntries(): void {
   }
 }
 
+const $dismissModal = document.querySelector('.dismiss-modal');
+if (!$dismissModal) throw new Error('The $dismiss query failed');
+
+const $dialog = document.querySelector('dialog');
+if (!$dialog) throw new Error('The $dialog query failed');
+
 $favoritesList.addEventListener('click', (event: Event) => {
-  const $eventTarget = event.target as HTMLElement; // need this
+  const $eventTarget = event.target as HTMLElement;
 
   if ($eventTarget.className !== 'editBtn') {
-    //
     return;
   }
 
-  const $closestLi = $eventTarget.closest('[data-entry-id]') as HTMLLIElement; // need this
+  const $closestLi = $eventTarget.closest('[data-entry-id]') as HTMLLIElement;
   console.log($closestLi);
   const $textArea = $closestLi.querySelector('textarea');
   console.log($textArea);
   if (!$closestLi) throw new Error('The $closestLi query failed');
 
-  const entryId = Number($closestLi.dataset.entryId); // need this
+  const entryId = Number($closestLi.dataset.entryId);
 
   for (let i = 0; i < dataObject.entries.length; i++) {
     if (dataObject.entries[i].entryId === entryId) {
-      // dataObject.editing = dataObject.entries[i];
       console.log('string matched');
       dataObject.entries[i].textarea = $textArea?.value;
       console.log('dataObject.entries[i]:', dataObject.entries[i]);
       console.log($textArea?.value);
     }
   }
-  alert('Sunset Update ');
+  $dialog.showModal();
+});
+
+$dismissModal.addEventListener('click', () => {
+  $dialog.close();
 });
 
 $favoritesList.addEventListener('click', (event: Event) => {

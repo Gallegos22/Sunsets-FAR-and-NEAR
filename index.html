@@ -38,7 +38,7 @@
                 1. Click<a
                   href="https://www.freemaptools.com/convert-us-zip-code-to-lat-lng.htm#google_vignette"
                   >HERE</a
-                >to convert your zipcode to Latitude &amp; Longitude.
+                >to convert your zip code to Latitude &amp; Longitude.
               </li>
               <li>
                 2. Copy and Paste your Latitude &amp; Longitude and come back to
@@ -91,12 +91,17 @@
           <div class="row">
             <div class="column-full">
               <button type="button" class="addBtn">Add Sunset</button>
-              <!-- <button class="editBtn">Edit Sunset</button> -->
             </div>
           </div>
         </div>
       </div>
     </div>
+    <dialog>
+      <h2 class="modal-heading">Your Entry Has Been Updated !</h2>
+      <div class="modal-actions">
+        <button class="dismiss-modal">Thanks!</button>
+      </div>
+    </dialog>
     <!-- This is the Favorite List Section -->
     <div data-view="favorites" class="hidden">
       <div class="row">
@@ -110,7 +115,9 @@
           <ul id="favoritesList" class="favoritesList"></ul>
         </div>
       </div>
-      <h3 class="no-sunsets">No Sunsets Have Been Logged..</h3>
+      <h3 class="no-sunsets" style="text-align: center">
+        No Sunsets Have Been Logged..
+      </h3>
     </div>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
