@@ -22,14 +22,12 @@ const $favoritesList = document.querySelector('#favoritesList');
 if (!$favoritesList) throw new Error('The $favoritesList query failed');
 const $addSunsetBtn = document.querySelector('.addBtn');
 if (!$addSunsetBtn) throw new Error('The $addSunsetBtn query failed');
-const $editBtn = document.querySelector('.editBtn');
-if (!$editBtn) throw new Error('The $editBtn query failed');
+// const $editBtn = document.querySelector('.editBtn');
+// if (!$editBtn) throw new Error('The $editBtn query failed');
 const $noSunsets = document.querySelector('.no-sunsets');
 if (!$noSunsets) throw new Error('The $noSunsets query failed');
 const $textArea = document.getElementById('notes');
 if (!$textArea) throw new Error('The $textArea query failed');
-const $saveBtn = document.querySelector('.saveBtn');
-if (!$saveBtn) throw new Error('The $saveBtn query failed');
 document.addEventListener('DOMContentLoaded', () => {
   toggleNoEntries();
   viewSwap(dataObject.view); // this makes sure that whenever we refresh the page we stay on whatever page we are currently on
@@ -37,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 $searchButtonForm.addEventListener('submit', async function (e) {
   e.preventDefault();
-  $editBtn?.classList.add('hidden');
-  $saveBtn.classList.add('hidden');
+  // $editBtn?.classList.add('hidden');
   const coordinates = $cordInput.value.trim();
   const latLong = coordinates.split(',');
   lat = Number(latLong[0]);
@@ -229,6 +226,10 @@ function renderFavoriteSunset(entry) {
   const colFull4 = document.createElement('div');
   colFull4.setAttribute('class', 'column-full');
   row4.append(colFull4);
+  const deleteBtn = document.createElement('button');
+  deleteBtn.setAttribute('class', 'deleteBtn');
+  deleteBtn.textContent = 'Delete Sunset';
+  colFull4.append(deleteBtn);
   const editBtn = document.createElement('button');
   editBtn.setAttribute('class', 'editBtn');
   editBtn.textContent = 'Edit Sunset';
@@ -243,16 +244,17 @@ function toggleNoEntries() {
   }
 }
 $favoritesList.addEventListener('click', (event) => {
-  const $eventTarget = event.target;
+  const $eventTarget = event.target; // need this
   if ($eventTarget.className !== 'editBtn') {
+    //
     return;
   }
-  const $closestLi = $eventTarget.closest('[data-entry-id]');
+  const $closestLi = $eventTarget.closest('[data-entry-id]'); // need this
   console.log($closestLi);
   const $textArea = $closestLi.querySelector('textarea');
   console.log($textArea);
   if (!$closestLi) throw new Error('The $closestLi query failed');
-  const entryId = Number($closestLi.dataset.entryId);
+  const entryId = Number($closestLi.dataset.entryId); // need this
   for (let i = 0; i < dataObject.entries.length; i++) {
     if (dataObject.entries[i].entryId === entryId) {
       // dataObject.editing = dataObject.entries[i];
@@ -262,5 +264,23 @@ $favoritesList.addEventListener('click', (event) => {
       console.log($textArea?.value);
     }
   }
-  alert('Sunset Updated');
+  alert('Sunset Update ');
+});
+$favoritesList.addEventListener('click', (event) => {
+  const $eventTarget = event.target;
+  if ($eventTarget.className !== 'deleteBtn') {
+    return;
+  }
+  const $closestLi = $eventTarget.closest('[data-entry-id]');
+  console.log($closestLi);
+  const entryId = Number($closestLi.dataset.entryId);
+  for (let i = 0; i < dataObject.entries.length; i++) {
+    if (dataObject.entries[i].entryId === entryId) {
+      dataObject.entries.splice(i, 1);
+    }
+  }
+  $closestLi.remove();
+  if (dataObject.entries.length === 0) {
+    toggleNoEntries();
+  }
 });
