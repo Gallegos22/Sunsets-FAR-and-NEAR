@@ -20,7 +20,7 @@ if (!$sunsetApi)
 const $cordInput = document.querySelector('input');
 if (!$cordInput)
     throw new Error('The $cordInput query failed');
-let apiData; // setting variables from line 31 - 33 as global data so we can re-use them in multiple functions
+let apiData;
 let lat;
 let long;
 const $sunsetInfo = document.querySelector('#sunset-info');
@@ -53,13 +53,12 @@ $searchButtonForm.addEventListener('submit', async function (e) {
         $sunsetInfo.textContent = 'Please provide coordinates.';
         return; // Early return if no coordinates are entered
     }
-    try { // my try block will run first so long as there is no exception
+    try {
         const response = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${long}`); // using await to fetch the data 'lat' and 'long'
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         } // if the response is not okay we will throw an error followed by the status error
         apiData = await response.json(); // so long as we were able to fetch a promise, we are now going to convert it to json (an object)
-        console.log('here', apiData);
         renderEntry(apiData.results, lat, long); // call our function with arguments to get the information needed
     }
     catch (error) { // if there is an exception my catch block will be executed
@@ -68,103 +67,15 @@ $searchButtonForm.addEventListener('submit', async function (e) {
     $cordInput.value = ''; // reset our search box so the numbers no longer show
     $sunsetInfo.classList.remove('hidden'); // remove our class so we can visually see the box
 });
-// $searchButtonForm.addEventListener('submit', async function (e) {
-//   e.preventDefault();
-//   const addressElement = document.querySelector('#address') as HTMLInputElement;
-//   const address = addressElement?.value.trim();
-//   if (!address) {
-//     console.log('Please enter an address.');
-//     $sunsetInfo.textContent = 'Please provide an address.';
-//     return; // Early return if no address is entered
-//   }
-//   getCoordinatesFromAddress(address);
-// });
-// async function getCoordinatesFromAddress(address: any):Promise<any> {
-//   const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
-//   try {
-//     const response = await fetch(url);
-//     const data = await response.json();
-//     if (data && data.length > 0) {
-//       lat = parseFloat(data[0].lat);
-//       long = parseFloat(data[0].lon);
-//       fetchSunriseSunset(lat, long);
-//     } else {
-//       console.log('No coordinates found for the given address.');
-//     }
-//   } catch (error) {
-//     console.error('Error fetching coordinates:', error);
-//   }
-// }
-// async function fetchSunriseSunset(lat: number, long: number):Promise<any> {
-//   try {
-//     const response = await fetch(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${long}&formatted=0`);
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! Status: ${response.status}`);
-//     }
-//     apiData = await response.json();
-//     console.log('Sunrise-Sunset data:', apiData);
-//     renderEntry(apiData.results, lat, long);
-//   } catch (error) {
-//     console.error('Error fetching sunrise-sunset data:', error);
-//   }
-//   $sunsetInfo?.classList.remove('hidden');
-// }
-// // function convertUTCtoPST(utcDate: Date): string {
-// //     // Options for formatting the date and time
-// //     const options: Intl.DateTimeFormatOptions = {
-// //         timeZone: 'America/Los_Angeles', // Pacific Time Zone
-// //         timeZoneName: 'short'
-// //     };
-// //     // Convert UTC time to PST
-// //     const pstTimeString = utcDate.toLocaleString('en-US', options);
-// //     return pstTimeString;
-// // }
 function renderEntry(entry, lat, long) {
-    console.log('entry', entry);
-    console.log('lat', lat);
-    console.log('long', long);
     if (!$heading3 || !$sunriseApi || !$sunsetApi)
         throw new Error('The queries for the API info are undefined');
-    $heading3.textContent = `Latitude: ${lat}  Longitude: ${long}`;
-    const utcSunriseTimeString = entry.sunset; // taking string
-    console.log('utcSunriseTimeString:', utcSunriseTimeString);
-    const sunrise = new Date(utcSunriseTimeString); // format into sunrise
-    console.log('sunrise:', sunrise);
-    sunrise.setTime(sunrise.getTime() - (4 * 60 * 60 * 1000));
-    const options = {
-        timeZone: 'America/Los_Angeles',
-        year: 'numeric', // Corrected type
-        month: 'numeric', // Corrected type
-        day: 'numeric', // Corrected type
-        hour: 'numeric', // Corrected type
-        minute: 'numeric', // Corrected type
-        second: 'numeric', // Corrected type
-    };
-    const formattedSunrise = sunrise.toLocaleString('en-US', options); // use en-Us to pass in options ,
-    console.log('formattedSunrise:', formattedSunrise);
-    $sunriseApi.textContent = formattedSunrise;
-    const utcSunsetTimeString = entry.sunrise;
-    console.log('utcSunsetTimeString:', utcSunsetTimeString);
-    const sunset = new Date(utcSunsetTimeString);
-    console.log('sunset:', sunset);
-    sunset.setTime(sunset.getTime() - (4 * 60 * 60 * 1000));
-    const formattedSunset = sunset.toLocaleString('en-US', options);
-    console.log('formattedSunset:', formattedSunset);
-    $sunsetApi.textContent = formattedSunset;
+    $heading3.textContent = `Latitude: ${lat}  Longitude: ${long}`; // visually applies our given lat and long
+    $sunriseApi.textContent = entry.sunrise; // visually applies my sunrise
+    $sunsetApi.textContent = entry.sunset; // visually applies my sunset
 }
-// function renderEntry(entry: Entry, lat: number, long: number): void { // renders our functions information
-//   console.log('entry', entry);
-//   console.log('lat', lat);
-//   console.log('long', long);
-//   if (!$heading3 || !$sunriseApi || !$sunsetApi)
-//     throw new Error('The queries for the API info are undefined');
-//   $heading3.textContent = `Latitude: ${lat}  Longitude: ${long}`; // visually applies our given lat and long
-//   $sunriseApi.textContent = entry.sunrise; // visually applies my sunrise
-//   $sunsetApi.textContent = entry.sunset; // visually applies my sunset
-// }
 $addSunsetBtn.addEventListener('click', function () {
     toggleNoEntries();
-    console.log('here');
     const newSunset = {
         lat,
         long,
@@ -173,7 +84,6 @@ $addSunsetBtn.addEventListener('click', function () {
         sunset: apiData.results.sunset,
         entryId: dataObject.nextEntryId,
     };
-    console.log(newSunset);
     dataObject.nextEntryId++;
     dataObject.entries.unshift(newSunset);
     $favoritesList.prepend(renderFavoriteSunset(newSunset)); //
@@ -281,7 +191,7 @@ function renderFavoriteSunset(entry) {
     colFull4.append(deleteBtn);
     const editBtn = document.createElement('button');
     editBtn.setAttribute('class', 'editBtn');
-    editBtn.textContent = 'Edit Sunset';
+    editBtn.textContent = 'Update Sunset';
     colFull4.append(editBtn);
     return li;
 }
@@ -305,18 +215,13 @@ $favoritesList.addEventListener('click', (event) => {
         return;
     }
     const $closestLi = $eventTarget.closest('[data-entry-id]');
-    console.log($closestLi);
     const $textArea = $closestLi.querySelector('textarea');
-    console.log($textArea);
     if (!$closestLi)
         throw new Error('The $closestLi query failed');
     const entryId = Number($closestLi.dataset.entryId);
     for (let i = 0; i < dataObject.entries.length; i++) {
         if (dataObject.entries[i].entryId === entryId) {
-            console.log('string matched');
             dataObject.entries[i].textarea = $textArea?.value;
-            console.log('dataObject.entries[i]:', dataObject.entries[i]);
-            console.log($textArea?.value);
         }
     }
     $dialog.showModal();
@@ -330,7 +235,6 @@ $favoritesList.addEventListener('click', (event) => {
         return;
     }
     const $closestLi = $eventTarget.closest('[data-entry-id]');
-    console.log($closestLi);
     const entryId = Number($closestLi.dataset.entryId);
     for (let i = 0; i < dataObject.entries.length; i++) {
         if (dataObject.entries[i].entryId === entryId) {
