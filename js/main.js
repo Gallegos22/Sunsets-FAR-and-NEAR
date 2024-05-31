@@ -235,14 +235,14 @@ function renderFavoriteSunset(entry) {
     colFull2.setAttribute('class', 'column-full');
     row2.append(colFull2);
     const image1 = document.createElement('img');
-    image1.setAttribute('src', './images/Sunrise.png');
+    image1.setAttribute('src', './images/sunrise.png');
     colFull2.append(image1);
     const paragraph1 = document.createElement('p');
     paragraph1.setAttribute('class', 'sunriseApi');
     paragraph1.textContent = entry.sunrise;
     colFull2.append(paragraph1);
     const image2 = document.createElement('img');
-    image2.setAttribute('src', './images/Sunset.png');
+    image2.setAttribute('src', './images/sunset.png');
     colFull2.append(image2);
     const paragraph2 = document.createElement('p');
     paragraph2.setAttribute('class', 'sunsetApi');

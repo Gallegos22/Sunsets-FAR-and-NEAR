@@ -287,7 +287,7 @@ function renderFavoriteSunset(entry: Entry): HTMLLIElement {
   row2.append(colFull2);
 
   const image1 = document.createElement('img');
-  image1.setAttribute('src', './images/Sunrise.png');
+  image1.setAttribute('src', './images/sunrise.png');
   colFull2.append(image1);
 
   const paragraph1 = document.createElement('p');
@@ -296,7 +296,7 @@ function renderFavoriteSunset(entry: Entry): HTMLLIElement {
   colFull2.append(paragraph1);
 
   const image2 = document.createElement('img');
-  image2.setAttribute('src', './images/Sunset.png');
+  image2.setAttribute('src', './images/sunset.png');
   colFull2.append(image2);
 
   const paragraph2 = document.createElement('p');
