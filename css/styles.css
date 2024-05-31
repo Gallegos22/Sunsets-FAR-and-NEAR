@@ -22,6 +22,10 @@ body {
   margin: 0 auto;
 }
 
+.main-heading {
+  padding-left: 14rem;
+}
+
 i {
   margin-top: 19px;
   cursor: pointer;

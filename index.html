@@ -18,7 +18,6 @@
     <title>Sunsets FAR and NEAR</title>
     <link rel="icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <link href="https://fonts.cdnfonts.com/css/sedan-sc" rel="stylesheet" />
     <link
@@ -31,11 +30,10 @@
   <body>
     <div class="heading-container">
       <div class="column-full">
-        <h1>&#127749;Sunsets FAR &amp; NEAR&#127748;</h1>
+        <h1 class="main-heading">&#127749;Sunsets FAR &amp; NEAR&#127748;</h1>
         <a><i class="fa-solid fa-list fa-xl" style="color: #ff9500"></i></a>
       </div>
     </div>
-    <!-- This is the Form Section -->
     <div data-view="home" class="">
       <form>
         <div class="row">
@@ -48,6 +46,7 @@
             <ul>
               <li>
                 1. Click<a
+                  target="”_blank”"
                   href="https://www.freemaptools.com/convert-us-zip-code-to-lat-lng.htm#google_vignette"
                   >HERE</a
                 >to convert your zip code to Latitude &amp; Longitude.
@@ -69,12 +68,6 @@
             placeholder="Latitude &amp; Longitude"
             id="coordinates"
             required />
-          <!-- <input
-            type="text"
-            name="address"
-            placeholder="Enter Zip Code"
-            id="address"
-            required /> -->
           <button class="searchBtn">Search</button>
         </div>
       </form>
@@ -120,7 +113,6 @@
         <button class="dismiss-modal">Thanks!</button>
       </div>
     </dialog>
-    <!-- This is the Favorite List Section -->
     <div data-view="favorites" class="hidden">
       <div class="row">
         <div class="column-full">
