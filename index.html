@@ -3,7 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Front-End-Project</title>
+    <meta property="og:title" content="Sunsets FAR and NEAR" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:description"
+      name="Sunsets FAR and NEAR:description"
+      content=" A Better way to find your perfect picture" />
+    <meta
+      property="og:url"
+      content="https://gallegos22.github.io/Sunsets-FAR-and-NEAR/" />
+    <meta
+      property="og:image"
+      content="https://gallegos22.github.io/Sunsets-FAR-and-NEAR/images/sunsets-far-and-near.png" />
+    <title>Sunsets FAR and NEAR</title>
     <link rel="icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
@@ -57,6 +69,12 @@
             placeholder="Latitude &amp; Longitude"
             id="coordinates"
             required />
+          <!-- <input
+            type="text"
+            name="address"
+            placeholder="Enter Zip Code"
+            id="address"
+            required /> -->
           <button class="searchBtn">Search</button>
         </div>
       </form>
@@ -69,7 +87,7 @@
           </div>
           <div class="row">
             <div class="column-full">
-              <img src="/images/Sunrise.png" />
+              <img class="sunriseImg" src="/images/Sunrise.png" />
               <p class="sunriseApi">6:24AM</p>
               <img src="/images/Sunset.png" />
               <p class="sunsetApi">1:35PM</p>
@@ -107,7 +125,7 @@
       <div class="row">
         <div class="column-full">
           <h2 class="favorite-sunset-header">Favorite Sunsets:</h2>
-          <button class="newBtn">New</button>
+          <button class="newBtn">New Sunset</button>
         </div>
       </div>
       <div class="row">
