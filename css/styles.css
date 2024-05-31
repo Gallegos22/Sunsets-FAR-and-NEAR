@@ -11,12 +11,12 @@
 }
 
 body {
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
 }
 
 .heading-container {
   display: flex;
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
   font-size: 28px;
   background-color: rgb(109, 229, 255);
   margin: 0 auto;
@@ -27,7 +27,7 @@ i {
   cursor: pointer;
 }
 
-input[type='text'] {
+input[type="text"] {
   text-align: center;
 }
 
@@ -64,7 +64,7 @@ input {
 }
 
 .noSunsetsText {
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
   font-size: 20px;
 }
 
@@ -75,7 +75,7 @@ h2 {
 
 .newBtn {
   font-size: 24px;
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
   border-radius: 4px;
   background-color: rgb(250, 165, 0);
   color: white;
@@ -88,7 +88,7 @@ h2 {
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
   font-size: 15px;
   margin-left: 54px;
 }
@@ -98,7 +98,7 @@ h2 {
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
   font-size: 15px;
 }
 
@@ -107,7 +107,7 @@ h2 {
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
   font-size: 34px;
 }
 
@@ -145,7 +145,7 @@ h1 {
 }
 
 #sunset-info {
-  width: 390px;
+  width: 500px;
   padding: 0;
   border: solid 2px black;
   border-radius: 15px;
@@ -157,7 +157,7 @@ h1 {
   background-color: rgb(250, 165, 0);
   color: white;
   cursor: pointer;
-  font-family: 'Sedan SC', sans-serif;
+  font-family: "Sedan SC", sans-serif;
 }
 
 .sunriseApi,
@@ -180,4 +180,8 @@ h1 {
 
 .modal-heading {
   padding: 0;
+}
+
+.sunriseImg {
+  margin-left: 25px;
 }
