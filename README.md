@@ -4,7 +4,7 @@ A full stack JavaScript application for photographers who want to find the perfe
 
 ## Why I Built This
 
-I wanted to build an application that would benefit photgraphers who want to find the perfect time to take photos. 
+I wanted to build an application that would benefit photographers who want to find the perfect time to take photos. 
 
 ## Technologies Used
 
