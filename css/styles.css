@@ -2,6 +2,10 @@
   display: none;
 }
 
+.icon {
+  margin-right: 1rem;
+}
+
 .no-sunsets {
   display: none;
 }
@@ -17,13 +21,9 @@ body {
 .heading-container {
   display: flex;
   font-family: "Sedan SC", sans-serif;
-  font-size: 28px;
+  font-size: 24px;
   background-color: rgb(109, 229, 255);
   margin: 0 auto;
-}
-
-.main-heading {
-  padding-left: 14rem;
 }
 
 i {
@@ -33,6 +33,10 @@ i {
 
 input[type="text"] {
   text-align: center;
+}
+
+.instructions {
+  margin-left: 1rem;
 }
 
 .column-full {
@@ -74,7 +78,6 @@ input {
 
 h2 {
   font-size: 35px;
-  padding-left: 150px;
 }
 
 .newBtn {
@@ -85,6 +88,7 @@ h2 {
   color: white;
   cursor: pointer;
   margin-left: 30%;
+  margin-right: 2rem;
 }
 
 .editBtn {
@@ -149,7 +153,7 @@ h1 {
 }
 
 #sunset-info {
-  width: 500px;
+  width: 23rem;
   padding: 0;
   border: solid 2px black;
   border-radius: 15px;
@@ -169,12 +173,16 @@ h1 {
   margin-top: -23px;
 }
 
+ul {
+  padding-left: 0;
+}
+
 .favoritesList > li {
   margin-top: 10px;
   border: solid 2px black;
   border-radius: 15px;
   padding: 0;
-  width: 390px;
+  width: 23rem;
 }
 
 .modal-actions {
@@ -186,6 +194,6 @@ h1 {
   padding: 0;
 }
 
-.sunriseImg {
-  margin-left: 25px;
+.favorite-sunset-header {
+  padding-left: 2rem;
 }
