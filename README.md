@@ -1,5 +1,4 @@
-# student-grade-table
-
+Sunsets FAR and NEAR
 A full stack JavaScript application for photographers who want to find the perfect time to take photos of the sunset and sunrise.
 
 ## Why I Built This
