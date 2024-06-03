@@ -31,8 +31,7 @@ Try the application live at https://gallegos22.github.io/Sunsets-FAR-and-NEAR/
 1. Clone the repository.
 
     ```shell
-    git clone https://github.com/Learning-Fuze/sgt-react
-    cd sgt-react
+    git clone git@github.com:Gallegos22/Sunsets-FAR-and-NEAR.git
     ```
 
 1. Install all dependencies with NPM.
@@ -41,15 +40,3 @@ Try the application live at https://gallegos22.github.io/Sunsets-FAR-and-NEAR/
     npm install
     ```
 
-1. Import the starting database to PostgreSQL.
-
-    ```shell
-    createdb sgtDb
-    npm run db:import
-    ```
-
-1. Start the project. Once started you can view the application by opening http://localhost:5173 in your browser.
-
-    ```shell
-    npm run dev
-    ```
