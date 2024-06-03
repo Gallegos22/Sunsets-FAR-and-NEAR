@@ -138,8 +138,7 @@ img {
 }
 
 a {
-  flex-grow: 1;
-  text-align: center;
+  padding-right: 1rem;
 }
 
 h1 {
